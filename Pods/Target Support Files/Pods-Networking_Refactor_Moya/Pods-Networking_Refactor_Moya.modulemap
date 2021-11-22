@@ -1,0 +1,6 @@
+framework module Pods_Networking_Refactor_Moya {
+  umbrella header "Pods-Networking_Refactor_Moya-umbrella.h"
+
+  export *
+  module * { export * }
+}
