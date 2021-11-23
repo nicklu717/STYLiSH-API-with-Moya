@@ -20,7 +20,7 @@
 		5A2F6B7A274CF4D900906101 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A722ABF2728720F00675334 /* NetworkProvider.swift */; };
 		5A2F6B7D274CF4F800906101 /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2F6B77274CF4CA00906101 /* SignInManager.swift */; };
 		5A2F6B7E274CF4F800906101 /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2F6B77274CF4CA00906101 /* SignInManager.swift */; };
-		5A434AC1274D1C23003977FF /* MoyaNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A434AC0274D1C23003977FF /* MoyaNetworkProvider.swift */; };
+		5A434AC1274D1C23003977FF /* MoyaProvider+RequestObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A434AC0274D1C23003977FF /* MoyaProvider+RequestObject.swift */; };
 		5A722AAC272871A200675334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A722AAB272871A200675334 /* AppDelegate.swift */; };
 		5A722AAE272871A200675334 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A722AAD272871A200675334 /* SceneDelegate.swift */; };
 		5A722AB0272871A200675334 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A722AAF272871A200675334 /* ViewController.swift */; };
@@ -39,6 +39,7 @@
 		5AE059E72747DF9E00069D20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A722AB6272871A300675334 /* LaunchScreen.storyboard */; };
 		5AE059E82747DF9E00069D20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A722AB4272871A300675334 /* Assets.xcassets */; };
 		5AE059F127492E6800069D20 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE059EF27492E5400069D20 /* APIs.swift */; };
+		5AF6853B274D052600FD02EE /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF6853A274D052600FD02EE /* APIs.swift */; };
 		8F521ECDECC5CDCEDC2ECAC9 /* Pods_Networking_Origin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D34FC28076BA9B826A6C62 /* Pods_Networking_Origin.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +51,7 @@
 		59D34FC28076BA9B826A6C62 /* Pods_Networking_Origin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking_Origin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A0F5291274A9A1600B7D8F9 /* Networking_Refactor_Moya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking_Refactor_Moya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A2F6B77274CF4CA00906101 /* SignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
-		5A434AC0274D1C23003977FF /* MoyaNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkProvider.swift; sourceTree = "<group>"; };
+		5A434AC0274D1C23003977FF /* MoyaProvider+RequestObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+RequestObject.swift"; sourceTree = "<group>"; };
 		5A722AA8272871A200675334 /* Networking_Origin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking_Origin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A722AAB272871A200675334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A722AAD272871A200675334 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		5A722ACF27393A7D00675334 /* CheckOutAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutAPI.swift; sourceTree = "<group>"; };
 		5AE059ED2747DF9E00069D20 /* Networking_Refactor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking_Refactor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE059EF27492E5400069D20 /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
+		5AF6853A274D052600FD02EE /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
 		C5AEC183B1AA963E5CF797FB /* Pods-Networking_Refactor_Moya.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking_Refactor_Moya.debug.xcconfig"; path = "Target Support Files/Pods-Networking_Refactor_Moya/Pods-Networking_Refactor_Moya.debug.xcconfig"; sourceTree = "<group>"; };
 		CD9BC9C3583AEEBA34F74DBB /* Pods-Networking_Origin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking_Origin.release.xcconfig"; path = "Target Support Files/Pods-Networking_Origin/Pods-Networking_Origin.release.xcconfig"; sourceTree = "<group>"; };
 		CE16B8A7EA3E7CCFBCA703BA /* Pods_Networking_Refactor_Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking_Refactor_Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,20 +148,12 @@
 			path = Refactor;
 			sourceTree = "<group>";
 		};
-		5A0F527F274A999B00B7D8F9 /* Refactor_Moya */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Refactor_Moya;
-			path = ../Refactor_Moya;
-			sourceTree = "<group>";
-		};
 		5A184752274CF71600FFF599 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
 				5A0F527D274A996600B7D8F9 /* Origin */,
 				5A0F527E274A998200B7D8F9 /* Refactor */,
-				5A0F527F274A999B00B7D8F9 /* Refactor_Moya */,
+				5AF68539274D051700FD02EE /* Refactor_Moya */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -169,7 +163,7 @@
 			children = (
 				5A2F6B77274CF4CA00906101 /* SignInManager.swift */,
 				5A722ABF2728720F00675334 /* NetworkProvider.swift */,
-				5A434AC0274D1C23003977FF /* MoyaNetworkProvider.swift */,
+				5A434AC0274D1C23003977FF /* MoyaProvider+RequestObject.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -208,6 +202,14 @@
 				5A184752274CF71600FFF599 /* APIs */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		5AF68539274D051700FD02EE /* Refactor_Moya */ = {
+			isa = PBXGroup;
+			children = (
+				5AF6853A274D052600FD02EE /* APIs.swift */,
+			);
+			path = Refactor_Moya;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,12 +462,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A0F5283274A9A1600B7D8F9 /* ViewController.swift in Sources */,
+				5AF6853B274D052600FD02EE /* APIs.swift in Sources */,
 				5A0F5284274A9A1600B7D8F9 /* AppDelegate.swift in Sources */,
 				5A2F6B7E274CF4F800906101 /* SignInManager.swift in Sources */,
 				5A2F6B79274CF4D900906101 /* NetworkProvider.swift in Sources */,
 				5A0F5285274A9A1600B7D8F9 /* Models.swift in Sources */,
 				5A0F5287274A9A1600B7D8F9 /* SceneDelegate.swift in Sources */,
-				5A434AC1274D1C23003977FF /* MoyaNetworkProvider.swift in Sources */,
+				5A434AC1274D1C23003977FF /* MoyaProvider+RequestObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,40 +1,36 @@
 //
 //  APIs.swift
-//  Networking_Refactor
+//  Networking_Refactor_Moya
 //
-//  Created by 陸瑋恩 on 2021/11/20.
+//  Created by 陸瑋恩 on 2021/11/23.
 //
 
-import Foundation
+import Moya
+import struct Alamofire.HTTPHeaders
 
-protocol StylishAPIProtocol {
-    var host: String { get }
+protocol StylishAPIProtocol: TargetType {
     var basePath: String { get }
     var additionalPath: String { get }
-    var url: URL { get }
-    var method: String { get }
-    var headers: [String: String]? { get }
-    var body: Data? { get }
-    
-    func makeRequest() -> URLRequest
+    var httpHeaders: HTTPHeaders { get }
+    var apiVersion: String { get }
 }
 
 extension StylishAPIProtocol {
     
-    var host: String {
-        return "https://api.appworks-school.tw/api/1.0"
+    var baseURL: URL {
+        return URL(string: "https://api.appworks-school.tw/api\(apiVersion)")!
     }
     
-    var url: URL {
-        return URL(string: "\(host)\(basePath)\(additionalPath)")!
+    var path: String {
+        return "\(basePath)\(additionalPath)"
     }
     
-    func makeRequest() -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = method
-        request.allHTTPHeaderFields = headers
-        request.httpBody = body
-        return request
+    var headers: [String : String]? {
+        return httpHeaders.dictionary
+    }
+    
+    var sampleData: Data {
+        return Data()
     }
 }
 
@@ -56,24 +52,31 @@ enum MarketingHotsAPI: StylishAPIProtocol {
         }
     }
     
-    var method: String {
+    var apiVersion: String {
         switch self {
         case .hots, .campaigns:
-            return "GET"
+            return "/1.0"
         }
     }
     
-    var headers: [String: String]? {
+    var method: Method {
         switch self {
         case .hots, .campaigns:
-            return nil
+            return .get
         }
     }
     
-    var body: Data? {
+    var httpHeaders: HTTPHeaders {
         switch self {
         case .hots, .campaigns:
-            return nil
+            return []
+        }
+    }
+    
+    var task: Task {
+        switch self {
+        case .hots, .campaigns:
+            return .requestPlain
         }
     }
 }
@@ -93,59 +96,63 @@ enum ProductListAPI: StylishAPIProtocol {
     
     var additionalPath: String {
         switch self {
-        case let .all(nextPage: nextPage):
-            var path = "/"
+        case .all:
+            return "/"
+        case .women:
+            return "/women"
+        case .men:
+            return "/men"
+        case .accessories:
+            return "/accessories"
+        case .search:
+            return "/search"
+        case .details:
+            return "/details"
+        }
+    }
+    
+    var apiVersion: String {
+        switch self {
+        case .all, .women, .men, .accessories, .search, .details:
+            return "/1.0"
+        }
+    }
+    
+    var method: Method {
+        switch self {
+        case .all, .women, .men, .accessories, .search, .details:
+            return .get
+        }
+    }
+    
+    var httpHeaders: HTTPHeaders {
+        switch self {
+        case .all, .women, .men, .accessories, .search, .details:
+            return []
+        }
+    }
+    
+    var task: Task {
+        switch self {
+        case let .all(nextPage: nextPage), let .women(nextPage: nextPage), let .men(nextPage: nextPage), let .accessories(nextPage: nextPage):
+            var parameters: [String: Any] = [:]
             if let nextPage = nextPage {
-                path += "?paging=\(nextPage)"
+                parameters["nextPage"] = nextPage
             }
-            return path
-        case let .women(nextPage: nextPage):
-            var path = "/women"
-            if let nextPage = nextPage {
-                path += "?paging=\(nextPage)"
-            }
-            return path
-        case let .men(nextPage: nextPage):
-            var path = "/men"
-            if let nextPage = nextPage {
-                path += "?paging=\(nextPage)"
-            }
-            return path
-        case let .accessories(nextPage: nextPage):
-            var path = "/accessories"
-            if let nextPage = nextPage {
-                path += "?paging=\(nextPage)"
-            }
-            return path
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+            
         case let .search(keyword: keyword, nextPage: nextPage):
-            var path = "/search?keyword=\(keyword)"
+            var parameters: [String: Any] = [:]
+            parameters["keyword"] = keyword
             if let nextPage = nextPage {
-                path += "&paging=\(nextPage)"
+                parameters["nextPage"] = nextPage
             }
-            return path
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+            
         case let .details(id: id):
-            return "/details?id=\(id)"
-        }
-    }
-    
-    var method: String {
-        switch self {
-        case .all, .women, .men, .accessories, .search, .details:
-            return "GET"
-        }
-    }
-    
-    var headers: [String: String]? {
-        switch self {
-        case .all, .women, .men, .accessories, .search, .details:
-            return nil
-        }
-    }
-    
-    var body: Data? {
-        switch self {
-        case .all, .women, .men, .accessories, .search, .details:
-            return nil
+            var parameters: [String: Any] = [:]
+            parameters["id"] = id
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }
 }
@@ -172,25 +179,36 @@ enum SignInAPI: StylishAPIProtocol {
         }
     }
     
-    var method: String {
+    var apiVersion: String {
+        switch self {
+        case .signIn, .signInWithFacebook, .signUp, .profile:
+            return "/1.0"
+        }
+    }
+    
+    var method: Method {
         switch self {
         case .signIn, .signInWithFacebook, .signUp:
-            return "POST"
+            return .post
         case .profile:
-            return "GET"
+            return .get
         }
     }
     
-    var headers: [String: String]? {
+    var httpHeaders: HTTPHeaders {
         switch self {
         case .signIn, .signInWithFacebook, .signUp:
-            return ["Content-Type": "application/json"]
+            return [
+                .contentType("application/json")
+            ]
         case let .profile(accessToken: accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
+            return [
+                .authorization(bearerToken: accessToken)
+            ]
         }
     }
     
-    var body: Data? {
+    var task: Task {
         switch self {
         case let .signIn(email: email, password: password):
             let parameters = [
@@ -198,14 +216,14 @@ enum SignInAPI: StylishAPIProtocol {
                 "email": email,
                 "password": password
             ]
-            return try! JSONEncoder().encode(parameters)
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case let .signInWithFacebook(accessToken: accessToken):
             let parameters = [
                 "provider": "facebook",
                 "access_token": accessToken
             ]
-            return try! JSONEncoder().encode(parameters)
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case let .signUp(email: email, password: password, name: name):
             let parameters = [
@@ -213,10 +231,10 @@ enum SignInAPI: StylishAPIProtocol {
                 "password": password,
                 "name": name
             ]
-            return try! JSONEncoder().encode(parameters)
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .profile:
-            return nil
+            return .requestPlain
         }
     }
 }
@@ -236,27 +254,34 @@ enum CheckOutAPI: StylishAPIProtocol {
         }
     }
     
-    var method: String {
+    var apiVersion: String {
         switch self {
         case .checkout:
-            return "POST"
+            return "/1.0"
         }
     }
     
-    var headers: [String: String]? {
+    var method: Method {
+        switch self {
+        case .checkout:
+            return .post
+        }
+    }
+    
+    var httpHeaders: HTTPHeaders {
         switch self {
         case let .checkout(accessToken: accessToken, checkOutInfo: _):
             return [
-                "Content-Type": "application/json",
-                "Authorization": "Bearer \(accessToken)"
+                .contentType("application/json"),
+                .authorization(bearerToken: accessToken)
             ]
         }
     }
     
-    var body: Data? {
+    var task: Task {
         switch self {
         case let .checkout(accessToken: _, checkOutInfo: checkOutInfo):
-            return try! JSONEncoder().encode(checkOutInfo)
+            return .requestJSONEncodable(checkOutInfo)
         }
     }
 }
